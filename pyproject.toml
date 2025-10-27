@@ -1,7 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "unknown-gen"
 version = "0.1.0"
 description = "GUI app to generate excel files containing combinations of bacteria."
+authors = [
+  { name = "Javier Arambula Rascon" }
+]
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -21,3 +28,10 @@ dependencies = [
     "tzdata==2025.2",
     "xlsxwriter==3.2.9",
 ]
+
+[tool.setuptools]
+include-package-data = true
+packages = ["src"]
+
+[project.scripts]
+unknown-gen = "src.__main__:main"
