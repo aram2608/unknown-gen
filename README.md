@@ -38,36 +38,22 @@ Section Number Bacteria         GramStain
 
 With each section getting its own sheet in the excel file.
 
-# Building-Usage
+# Usage
 ---
-
-To package the app into an executable, use the following commands.
 
 ```shell
 python -m venv venv
 source .venv/bin/activate
 
-# Not always needed but good to run just in case
+# Not always needed but sometimes good to run just in case
 python3 -m ensurepip
+
+# Install requirements
 pip install -r requirements.txt
 
 # Or
 python -m pip install requirements.txt
-```
 
-Depending on how your `pip` is set up, you sometimes need to run `pip3` instead.
-
-```shell
-# For macOS
-pyinstaller --noconsole --icon=unknown-gen.icns unknown-gen.py
-
-# For windows
-pyinstaller --noconsole --icon=unknown-gen.ico unknown-gen.py
-```
-
-You can then use the app as you would normally for any downloaded application.
-
-Or you can simply launch as a python module.
-```shell
+# Then you can run as a module
 python3 -m src/
 ```
