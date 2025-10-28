@@ -18,6 +18,9 @@ class GUIWrapper:
         # Root frame
         self.construct_root()
 
+        # Menu bars
+        self.construct_menu()
+
         # Frame 1 for gram positive bacteria
         self.construct_gram_pos()
 
@@ -58,6 +61,26 @@ class GUIWrapper:
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_rowconfigure(1, weight=1)
         self.root.grid_rowconfigure(3, weight=1)
+
+    def construct_menu(self):
+        """Helper to make our menu, it is pretty lean for now."""
+        self.menubar = tk.Menu(self.root)
+        self.root.config(menu=self.menubar)
+        self.file_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="Info", menu=self.file_menu)
+        # We only have an about command for now since that is all that is needed
+        self.file_menu.add_command(
+            label="About",
+            command=lambda: messagebox.showinfo(
+                "About unknown-gen",
+                "unknown-gen v1.0\n\n"
+                "Developed by: Javier Arambula Rascon\n"
+                "© 2025 All Rights Reserved.",
+            ),
+        )
+        # We add a small separator to make it look nicer
+        self.file_menu.add_separator()
+        self.file_menu.add_command(label="Exit", command=self.root.quit)
 
     def construct_gram_pos(self):
         """Small helper to construct the gram positive frame."""
@@ -296,25 +319,6 @@ class GUIWrapper:
             font=("Arial", 12, "bold"),
         )
         self.status.grid(row=6, column=1, sticky="W", padx=10, pady=15)
-
-        # We can now add a little about button to show the application info
-        self.about = tk.Button(
-            self.generate_frame,
-            text="About",
-            command=lambda: messagebox.showinfo(
-                "About unknown-gen",
-                "unknown-gen v1.0\n\n"
-                "Developed by: Javier Arambula Rascon\n"
-                "© 2025 All Rights Reserved.",
-            ),
-            bg=self.BUTTON_BG,
-            fg=self.BUTTON_FG,
-            activebackground=self.HIGHLIGHT,
-            borderwidth=0,
-            padx=10,
-            pady=5,
-        )
-        self.about.grid(row=7, column=1, padx=10, pady=(5, 10), sticky="E")
 
     def add_gram_pos(self):
         """Small helper to store a new gram positive bacteria."""

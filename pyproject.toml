@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "unknown-gen"
-version = "0.1.0"
+version = "1.0.0"
 description = "GUI app to generate excel files containing combinations of bacteria."
 authors = [
   { name = "Javier Arambula Rascon" }
