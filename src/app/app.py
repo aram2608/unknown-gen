@@ -1,12 +1,12 @@
 import tkinter as tk
 from ..frame.frame import GramFrame, ControlFrame
 from ..controller.controller import Controller
-
+from ..menu.menu import GramMenu
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.controller = Controller()
+        self.controller: Controller = Controller()
         self.title("Unknown Bacteria Generator")
         self.geometry("600x600")
         self.grid_columnconfigure(0, weight=1)
@@ -14,6 +14,8 @@ class App(tk.Tk):
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=1)
         self._make_frames()
+        self.menubar = GramMenu(self, self.quit)
+        self.config(menu=self.menubar)
 
     def _make_frames(self):
         # We populate each frame

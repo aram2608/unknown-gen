@@ -1,13 +1,20 @@
 import random
 import pandas as pd  # type: ignore
+from typing import List
 
 
-def generate_excel(gramp_list, gramn_list, sections, range_size, file_name):
+def generate_excel(
+    gramp_list: List[str],
+    gramn_list: List[str],
+    sections: int,
+    range_size: int,
+    file_name: str,
+):
     # We append the proper extension to the string
-    file_name = file_name + ".xlsx"
+    file_name += ".xlsx"
     # We run this in a try block to catch any exceptions
     try:
-        # Initialize the ExcelWriter object using xlswriter
+        # We initialize the ExcelWriter object using xlswriter
         # We use a context manager to create the writer object
         with pd.ExcelWriter(file_name, engine="xlsxwriter") as writer:
 
@@ -68,6 +75,8 @@ def generate_excel(gramp_list, gramn_list, sections, range_size, file_name):
 
                 # We can now write the current section's DataFrame to the specified sheet
                 df_section.to_excel(writer, sheet_name=sheet_name, index=False)
+        # If our run was successful we return true
         return True
     except Exception as e:
+        # If it failed we return false
         return False
