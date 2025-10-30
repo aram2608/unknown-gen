@@ -2,14 +2,16 @@ import tkinter as tk
 
 from ..palette.palette import Palette
 
+
 class GramFrame(tk.Frame):
-    def __init__(self, master, name, entry_text):
+    def __init__(self, master, name, entry_text, controller):
         super().__init__(
             master=master,
             highlightbackground=Palette.HIGHLIGHT,
             highlightthickness=2,
             bg=Palette.FRAME_BG,
         )
+        self.controller = controller
         self.name = name
         self.entry_text = entry_text
         self.columnconfigure(1, weight=1)
@@ -28,7 +30,9 @@ class GramFrame(tk.Frame):
         self.add = tk.Button(
             self,
             text="Add New Bacteria",
-            command=lambda: print("Button click", self.name),
+            command=lambda: self.controller.add_bacteria(
+                self.name, self.entry, self.entry_label
+            ),
             bg=Palette.BUTTON_BG,
             fg=Palette.BUTTON_FG,
             activebackground=Palette.HIGHLIGHT,
@@ -56,13 +60,14 @@ class GramFrame(tk.Frame):
 
 
 class ControlFrame(tk.Frame):
-    def __init__(self, master):
+    def __init__(self, master, controller):
         super().__init__(
             master=master,
             highlightbackground=Palette.HIGHLIGHT,
             highlightthickness=2,
             bg=Palette.FRAME_BG,
         )
+        self.controller = controller
         self.columnconfigure(1, weight=1)
         self._create_frame()
         self._create_sections_widget()
@@ -92,7 +97,9 @@ class ControlFrame(tk.Frame):
         self.add_sections = tk.Button(
             self,
             text="Add number of sections",
-            command=lambda: print("Add sections."),
+            command=lambda: self.controller.add_section_number(
+                self.add_section_entry, self.show_sections
+            ),
             bg=Palette.BUTTON_BG,
             fg=Palette.BUTTON_FG,
             activebackground=Palette.HIGHLIGHT,
@@ -121,7 +128,7 @@ class ControlFrame(tk.Frame):
         self.add_count = tk.Button(
             self,
             text="Add students per class",
-            command=lambda: print("Add number of students"),
+            command=lambda: self.controller.add_student_number(self.student_count_entry, self.count_label),
             bg=Palette.BUTTON_BG,
             fg=Palette.BUTTON_FG,
             activebackground=Palette.HIGHLIGHT,
@@ -137,12 +144,39 @@ class ControlFrame(tk.Frame):
         self.student_count_entry.grid(
             row=3, column=1, padx=(0, 10), pady=2, sticky="EW"
         )
-    
+
     def _create_generate_widget(self):
+        self.file_name_label = tk.Label(
+            self,
+            text="Please provide the file name",
+            bg=Palette.FRAME_BG,
+            fg=Palette.TEXT_FG,
+            font=("Arial", 11, "bold"),
+        )
+        self.file_name_label.grid(row=4, column=1, pady=(10, 2), padx=(0, 10), sticky="W")
+
+        self.add_file_name = tk.Button(
+            self,
+            text="Add the file name",
+            command=lambda: self.controller.add_file_name(self.file_name_entry, self.file_name_label),
+            bg=Palette.HIGHLIGHT,
+            fg=Palette.BUTTON_FG,
+            activebackground=Palette.HIGHLIGHT,
+            borderwidth=0,
+            padx=10,
+            pady=5,
+        )
+        self.add_file_name.grid(row=5, column=0, padx=(10, 5), pady=2, sticky="W")
+
+        self.file_name_entry = tk.Entry(
+            self, bg=Palette.ENTRY_BG, fg=Palette.ENTRY_FG, relief="flat"
+        )
+        self.file_name_entry.grid(row=5, column=1, padx=(0, 10), pady=2, sticky="EW")
+
         self.generate = tk.Button(
             self,
             text="Generate Random Bacteria",
-            command=lambda: print("Generate"),
+            command=lambda: self.controller.generate_random(self.status),
             bg=Palette.HIGHLIGHT,
             fg=Palette.BUTTON_FG,
             activebackground=Palette.HIGHLIGHT,
