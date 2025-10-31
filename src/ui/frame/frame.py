@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 
 class GramFrame(tk.Frame):
+    """Frame class to contain core widgets used for adding bacteria types."""
     def __init__(
         self, master: tk.Tk, name: str, entry_text: str, controller: Controller
     ):
@@ -37,6 +38,7 @@ class GramFrame(tk.Frame):
         self._create_frame()
 
     def _create_frame(self):
+        """Helper method to create the GramFrame widgets"""
         # We create the main label for our widget to inform our user about the type
         # of bacteria
         self.label = tk.Label(
@@ -95,6 +97,7 @@ class GramFrame(tk.Frame):
 
 
 class ControlFrame(tk.Frame):
+    """Frame class to contain the logic for generating the randomized Excel files."""
     def __init__(self, master, controller: Controller):
         """
         The ControlFrame is the main frame for actually generating the random Excel
