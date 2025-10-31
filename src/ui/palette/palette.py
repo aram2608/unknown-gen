@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Palette:
     FRAME_BG: str = "#333A40"
     HIGHLIGHT: str = "#00BFA5"

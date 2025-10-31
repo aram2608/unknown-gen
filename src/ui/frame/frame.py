@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from ..palette.palette import Palette
 
 if TYPE_CHECKING:
-    from ..controller.controller import Controller
+    from ...controller.controller import Controller
 
 
 class GramFrame(tk.Frame):

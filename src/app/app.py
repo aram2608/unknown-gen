@@ -1,7 +1,7 @@
 import tkinter as tk
-from ..frame.frame import GramFrame, ControlFrame
+from ..ui.frame.frame import GramFrame, ControlFrame
 from ..controller.controller import Controller
-from ..menu.menu import GramMenu
+from ..ui.menu.menu import GramMenu
 
 class App(tk.Tk):
     def __init__(self):
@@ -14,7 +14,7 @@ class App(tk.Tk):
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=1)
         self._make_frames()
-        self.menubar = GramMenu(self, self.quit)
+        self.menubar: tk.Menu = GramMenu(self, self.quit)
         self.config(menu=self.menubar)
 
     def _make_frames(self):

@@ -1,5 +1,9 @@
 from .app.app import App
 
-if __name__ == "__main__":
+def main():
+    """CLI entry for packaging tools."""
     app = App()
     app.mainloop()
+
+if __name__ == "__main__":
+    main()
